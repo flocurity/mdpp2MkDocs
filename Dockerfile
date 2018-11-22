@@ -33,23 +33,23 @@ ADD ./requirements.txt ./
 
 # install requirements
 RUN \
-    pip3 install --no-cache-dir -r ./requirements.txt
+    pip3 install --no-cache-dir -r ./requirements.txt &&\
+    useradd --create-home --shell /bin/bash md_user
 
 #########################
 ## LAYER : PYTHON FILES #
 #########################
 
 # MarkdownPP for CI
-ADD ./transform.py ./transform.py
+ADD ./transform.py /home/md_user/transform.py
 # links processors
-ADD ./update_links.py ./update_links.py
+ADD ./update_links.py /home/md_user/update_links.py
 
 # fix permissions
 RUN \
-    useradd --create-home --shell /bin/bash md_user &&\
-    chown md_user:md_user transform.py &&\
-    chmod u+x transform.py &&\
-    chown md_user:md_user update_links.py &&\
-    chmod u+x update_links.py
+    chown md_user:md_user /home/md_user/transform.py &&\
+    chmod u+x /home/md_user/transform.py &&\
+    chown md_user:md_user /home/md_user/update_links.py &&\
+    chmod u+x /home/md_user/update_links.py
 
 USER md_user

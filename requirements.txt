@@ -1,0 +1,15 @@
+# obvious
+markdown==3.0.1
+
+# templating
+markdownpp==1.5.1
+
+# mkdocs
+mkdocs==1.0.4
+
+# mkdocs theme
+mkdocs-material==3.0.6
+
+# export PDF : mkdocs-material is the only theme supported
+# WeasyPrint
+# mkdocs-pdf-export-plugin

@@ -13,7 +13,7 @@ LABEL name="mdpp2MkDocs" \
 ADD ./requirements.txt ./
 
 RUN \
-    useradd --create-home --shell /bin/bash md_user
+    useradd --create-home --shell /bin/bash md_user &&\
     # install linkchecker (not compatible with python3 ==> use apt)
     apt install -y linkchecker --no-install-recommends &&\
     rm -rf /var/lib/apt/lists/* &&\

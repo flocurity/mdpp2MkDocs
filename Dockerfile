@@ -52,6 +52,7 @@ RUN \
     chown md_user:md_user ./transform.py &&\
     chmod u+x ./transform.py &&\
     chown md_user:md_user ./update_links.py &&\
-    chmod u+x ./update_links.py
+    chmod u+x ./update_links.py &&\
+    alias transform='python3 /home/md_user/transform.py'
 
 USER md_user

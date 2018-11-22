@@ -40,16 +40,18 @@ RUN \
 ## LAYER : PYTHON FILES #
 #########################
 
+WORKDIR /home/md_user
+
 # MarkdownPP for CI
-ADD ./transform.py /home/md_user/transform.py
+ADD ./transform.py ./transform.py
 # links processors
-ADD ./update_links.py /home/md_user/update_links.py
+ADD ./update_links.py ./update_links.py
 
 # fix permissions
 RUN \
-    chown md_user:md_user /home/md_user/transform.py &&\
-    chmod u+x /home/md_user/transform.py &&\
-    chown md_user:md_user /home/md_user/update_links.py &&\
-    chmod u+x /home/md_user/update_links.py
+    chown md_user:md_user ./transform.py &&\
+    chmod u+x ./transform.py &&\
+    chown md_user:md_user ./update_links.py &&\
+    chmod u+x ./update_links.py
 
 USER md_user

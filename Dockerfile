@@ -47,13 +47,10 @@ ADD ./files ./
 # fix permissions
 RUN \
     # Orchestrator
-    chown md_user:md_user ./transform.sh &&\
-    chmod u+x ./transform.sh &&\
-    # MarkdownPP for CI
-    chown md_user:md_user ./transform.py &&\
-    chmod u+x ./transform.py &&\
-    # links processors
-    chown md_user:md_user ./update_links.py &&\
-    chmod u+x ./update_links.py
+    chown md_user:md_user ./*.sh &&\
+    chmod u+x ./*.sh &&\
+    # MarkdownPP for CI && links processors
+    chown md_user:md_user ./*.py &&\
+    chmod u+x ./*.py
 
 USER md_user

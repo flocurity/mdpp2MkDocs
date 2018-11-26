@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts :mvlu option; do
+while getopts m:vlu option; do
   case "${option}" in
     m)
       MODE=${OPTARG}

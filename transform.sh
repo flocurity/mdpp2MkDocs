@@ -1,17 +1,26 @@
 #!/usr/bin/env bash
 
-# while getopts :u:d:p:f: option
-# do
-# case "${option}"
-# in
-# u) USER=${OPTARG};;
-# d) DATE=${OPTARG};;
-# p) PRODUCT=${OPTARG};;
-# f) FORMAT=$OPTARG;;
-# esac
-# done
+while getopts :mvl option; do
+  case "${option}" in
+    m)
+      MODE=${OPTARG}
+      echo "Mode is 'destruct_mode'"
+      ;;
+    v)
+      VERBOSE="-v"
+      ;;
+    l)
+      LINKCHECKER=true
+      ;;
+  esac
+done
 
-python3 /home/md_user/transform.py
-mkdocs build -v
-linkchecker site/index.html
+python3 /home/md_user/transform.py "$MODE"
+
+mkdocs build "$VERBOSE"
+
+if [ "$LINKCHECKER" = true ] ; then
+  linkchecker site/index.html
+fi
+
 mv site public

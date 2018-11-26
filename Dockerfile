@@ -42,6 +42,8 @@ RUN \
 
 WORKDIR /home/md_user
 
+# Orchestrator
+ADD ./transform.sh ./transform.sh
 # MarkdownPP for CI
 ADD ./transform.py ./transform.py
 # links processors
@@ -49,6 +51,8 @@ ADD ./update_links.py ./update_links.py
 
 # fix permissions
 RUN \
+    chown md_user:md_user ./transform.sh &&\
+    chmod u+x ./transform.sh &&\
     chown md_user:md_user ./transform.py &&\
     chmod u+x ./transform.py &&\
     chown md_user:md_user ./update_links.py &&\

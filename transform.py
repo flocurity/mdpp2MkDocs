@@ -63,9 +63,12 @@ if __name__ == '__main__':
 
     # destroy unecessary files on CI environment
     destruct_mode = False
-    if len(sys.argv) == 2 and sys.argv[1] == 'destruct_mode':
-        logger.warning('destructive mode enabled - for CI environment')
-        destruct_mode = True
+    if len(sys.argv) == 2:
+        if sys.argv[1] == 'destruct_mode':
+            logger.warning('destructive mode enabled - for CI environment')
+            destruct_mode = True
+        else:
+            logger.warning('unknown mode [ {} ]'.format(sys.argv[1]))
 
     # first : process template files : to be included :)
     for template in ls('docs/template'):

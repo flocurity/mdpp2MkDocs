@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # Function: Print a help message.
 usage() {
   echo "Usage: $0 [ -m MODE ] [ -v ] [ -l ] [ -u ]" 1>&2
@@ -29,7 +28,7 @@ while getopts m:vluh option; do
       LINKCHECKER=true
       ;;
     u)
-      cat /home/md_user/hidden_file
+      cat /home/md_user/hidden_file || cat ${HOME}/git/mdpp2MkDocs/files/hidden_file
       ;;
     :)
       echo "Error: -${OPTARG} requires an argument."
@@ -43,12 +42,22 @@ while getopts m:vluh option; do
   esac
 done
 
-python3 /home/md_user/transform.py $MODE
+# if [ -z ${CI} ]; then
+#   echo "local ! merge git & docker files"
+#   ls /md
+#   cp -ar /md/* /home/md_user
+#   pwd && ls
+# fi
 
+# Markdown-PP + replace {./.} with relative links to the root of the document
+python3 /home/md_user/transform.py $MODE || python3 ${HOME}/git/mdpp2MkDocs/files/transform.py $MODE
+
+# Mkdocs
 mkdocs build $VERBOSE
 
 if [ "$LINKCHECKER" = true ] ; then
-  linkchecker site/index.html
+  linkchecker ./site/index.html
 fi
 
-mv site public
+rm -rf -- ./public/
+mv ./site/ ./public/

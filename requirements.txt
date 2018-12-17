@@ -8,7 +8,7 @@ markdownpp==1.5.1
 mkdocs==1.0.4
 
 # mkdocs theme
-mkdocs-material==3.0.6
+mkdocs-material==3.1.0
 
 # export PDF : mkdocs-material is the only theme supported
 # WeasyPrint
